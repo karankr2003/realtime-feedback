@@ -6,7 +6,8 @@ import {
   FeedbackListResponse,
   AnalyticsStatsResponse 
 } from '@/lib/types/api';
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+// Ignore NEXT_PUBLIC_API_URL in production to prevent localhost fetches
+const BASE_URL = process.env.NODE_ENV === 'production' ? '' : (process.env.NEXT_PUBLIC_API_URL || '');
 
 interface RequestOptions extends RequestInit {
   token?: string;
