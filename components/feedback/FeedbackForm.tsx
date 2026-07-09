@@ -107,19 +107,19 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-2xl space-y-6">
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-800">{error}</p>
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 backdrop-blur-sm">
+          <p className="text-red-200">{error}</p>
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-          <p className="text-green-800">Thank you! Your feedback has been submitted successfully.</p>
+        <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 backdrop-blur-sm">
+          <p className="text-green-200">Thank you! Your feedback has been submitted successfully.</p>
         </div>
       )}
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-slate-200 mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-purple-200/80 mb-2">
           Email Address
         </label>
         <Input
@@ -131,22 +131,23 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
           onChange={handleInputChange}
           placeholder="your@email.com"
           disabled={isLoading}
+          className="bg-slate-950/50 border-purple-500/30 focus:border-purple-500 text-white placeholder:text-slate-400"
         />
       </div>
 
       <div>
-        <label htmlFor="category" className="block text-sm font-medium text-slate-200 mb-2">
+        <label htmlFor="category" className="block text-sm font-medium text-purple-200/80 mb-2">
           Feedback Category
         </label>
         <Select value={formData.categoryId} onValueChange={(value) => handleSelectChange(value as string)} disabled={isLoading}>
-          <SelectTrigger id="category" className="w-full">
+          <SelectTrigger id="category" className="w-full bg-slate-950/50 border-purple-500/30 focus:border-purple-500 text-white">
             <SelectValue placeholder="Select a category">
               {categories.find((c) => c.id.toString() === formData.categoryId)?.name}
             </SelectValue>
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-slate-950 border-purple-500/30">
             {categories.map((category) => (
-              <SelectItem key={category.id} value={category.id.toString()}>
+              <SelectItem key={category.id} value={category.id.toString()} className="text-white focus:bg-purple-500/20">
                 {category.name}
               </SelectItem>
             ))}
@@ -155,7 +156,7 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
       </div>
 
       <div>
-        <label htmlFor="title" className="block text-sm font-medium text-slate-200 mb-2">
+        <label htmlFor="title" className="block text-sm font-medium text-purple-200/80 mb-2">
           Title
         </label>
         <Input
@@ -168,14 +169,15 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
           onChange={handleInputChange}
           placeholder="Brief title of your feedback"
           disabled={isLoading}
+          className="bg-slate-950/50 border-purple-500/30 focus:border-purple-500 text-white placeholder:text-slate-400"
         />
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-xs text-purple-300/60 mt-1">
           {formData.title.length}/255 characters
         </p>
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-slate-200 mb-2">
+        <label htmlFor="description" className="block text-sm font-medium text-purple-200/80 mb-2">
           Description
         </label>
         <Textarea
@@ -189,14 +191,15 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
           placeholder="Detailed description of your feedback"
           disabled={isLoading}
           rows={6}
+          className="bg-slate-950/50 border-purple-500/30 focus:border-purple-500 text-white placeholder:text-slate-400"
         />
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-xs text-purple-300/60 mt-1">
           {formData.description.length}/5000 characters
         </p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-200 mb-2">
+        <label className="block text-sm font-medium text-purple-200/80 mb-2">
           Rating (Optional)
         </label>
         <div className="flex gap-2">
@@ -206,10 +209,10 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
               type="button"
               onClick={() => handleRatingChange(rating.toString())}
               disabled={isLoading}
-              className={`w-10 h-10 rounded-lg border-2 transition-colors font-medium ${
+              className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 font-medium text-lg ${
                 formData.rating === rating.toString()
-                  ? 'border-indigo-500 bg-indigo-500 text-white'
-                  : 'border-white/10 bg-slate-950/80 text-slate-200 hover:border-indigo-500 hover:text-white'
+                  ? 'border-purple-500 bg-gradient-to-br from-purple-500 to-indigo-500 text-white shadow-lg shadow-purple-500/30 scale-105'
+                  : 'border-purple-500/30 bg-slate-950/50 text-purple-300 hover:border-purple-500 hover:text-white hover:bg-purple-500/10'
               }`}
             >
               {rating}
@@ -221,7 +224,7 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
       <Button
         type="submit"
         disabled={isLoading}
-        className="w-full"
+        className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white border-0 shadow-lg shadow-purple-500/30 transition-all duration-200"
         size="lg"
       >
         {isLoading ? 'Submitting...' : 'Submit Feedback'}
