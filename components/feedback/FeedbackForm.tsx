@@ -141,7 +141,11 @@ export function FeedbackForm({ onSuccess }: FeedbackFormProps) {
         </label>
         <Select value={formData.categoryId} onValueChange={(value) => handleSelectChange(value as string)} disabled={isLoading}>
           <SelectTrigger id="category" className="w-full bg-slate-950/50 border-purple-500/30 focus:border-purple-500 text-white">
-            <SelectValue placeholder="Select a category" />
+            <SelectValue placeholder="Select a category">
+              {formData.categoryId 
+                ? categories.find((c) => c.id.toString() === formData.categoryId)?.name 
+                : "Select a category"}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent className="bg-slate-950 border-purple-500/30">
             {categories.map((category) => (
