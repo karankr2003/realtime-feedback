@@ -312,10 +312,5 @@ All errors are logged with Winston logger for debugging.
 6. **Rate Limiting**: Add rate limiting middleware for production
 7. **Monitoring**: Set up error tracking and monitoring
 
-## License
 
-MIT
 
-## Support
-
-For issues or questions, refer to the code documentation in each module or check the comprehensive type definitions in `src/types/index.ts`.
